@@ -54,7 +54,7 @@ jobs:
         if: ${{ steps.check.outputs.isBuild }} == 'true'
         working-directory: "./transfermarket-api"
         run: | 
-            docker build . -t "ghcr.io/globall-connect/transfermarketapi:${{steps.getsha.outputs.latest_sha}}"" -t "ghcr.io/globall-connect/transfermarketapi:latest"
+            docker build . -t "ghcr.io/globall-connect/transfermarketapi:${{steps.getsha.outputs.latest_sha}}" -t "ghcr.io/globall-connect/transfermarketapi:latest"
       - name: Push Docker Image
         if: ${{ steps.check.outputs.isBuild }} == 'true'
         working-directory: "./transfermarket-api"
