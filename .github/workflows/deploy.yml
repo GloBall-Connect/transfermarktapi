@@ -54,10 +54,10 @@ jobs:
         if: ${{ steps.check.outputs.isBuild }} == 'true'
         working-directory: "./transfermarket-api"
         run: | 
-            docker build . -t "ghcr.io/gloBall-connect/transfermarktapi:${{steps.getsha.outputs.latest_sha}} -t ghcr.io/gloBall-connect/transfermarktapi:latest"
+            docker build . -t "ghcr.io/globall-connect/transfermarktapi:${{steps.getsha.outputs.latest_sha}} -t ghcr.io/globall-connect/transfermarktapi:latest"
       - name: Push Docker Image
         if: ${{ steps.check.outputs.isBuild }} == 'true'
         working-directory: "./transfermarket-api"
         run: | 
-            docker push "ghcr.io/gloBall-connect/transfermarktapi:${{steps.getsha.outputs.latest_sha}} -t ghcr.io/gloBall-connect/transfermarktapi:latest"
+            docker push "ghcr.io/globall-connect/transfermarktapi:${{steps.getsha.outputs.latest_sha}} -t ghcr.io/globall-connect/transfermarktapi:latest"
  
