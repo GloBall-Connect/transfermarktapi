@@ -65,3 +65,11 @@ jobs:
             docker push "ghcr.io/globall-connect/transfermarketapi:${{steps.getsha.outputs.latest_sha}}"
             docker push "ghcr.io/globall-connect/transfermarketapi:latest"
  
+  deploy:
+    runs-on: ubuntu-latest
+    environment: 
+      name: 'production'
+    steps:
+      - name: 'Trigger Webhook for CD on Azure App Service'
+        run: | 
+          curl https://\${{ secrets.AZURE_APP_SERVICE_WEBHOOK }}@transfermarketapi.scm.azurewebsites.net/docker/hook -H "" -d ""
