@@ -6,7 +6,7 @@ on:
     - cron: '0 */4 * * *'
 
 permissions:
-  packages: read/write
+  packages: write
 
 jobs:
   build:
