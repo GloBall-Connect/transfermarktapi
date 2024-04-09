@@ -1,9 +1,10 @@
 name: Build and Deploy Transfer Market API
 
 on:
-  workflow_dispatch:
   schedule:
     - cron: '0 */4 * * *'
+  workflow_dispatch:
+  
 
 permissions:
   packages: write
