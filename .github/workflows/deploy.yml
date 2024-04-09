@@ -17,6 +17,7 @@ jobs:
       latest_sha: ${{steps.check.outputs.latest_sha}}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           repository: "felipeall/transfermarkt-api"
           path: './transfermarket-api'
