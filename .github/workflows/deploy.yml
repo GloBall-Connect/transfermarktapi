@@ -60,7 +60,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    if: ${{ vars.LATEST_SHA != needs.build.outputs.deploy }}
+    if: ${{ vars.LATEST_SHA != needs.build.outputs.latest_sha }}
     environment: 
       name: 'production'
     steps:
