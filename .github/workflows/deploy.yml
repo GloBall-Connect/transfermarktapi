@@ -28,6 +28,7 @@ jobs:
             latest_sha=$(git rev-parse HEAD)
             echo "Output [$latest_sha]"
             echo "latest_sha=$latest_sha" >> $GITHUB_OUTPUT 
+
       - name: Set up QEMU
         if: ${{ vars.LATEST_SHA != steps.check.outputs.latest_sha }}
         uses: docker/setup-qemu-action@v3
@@ -48,12 +49,12 @@ jobs:
         if: ${{ vars.LATEST_SHA != steps.check.outputs.latest_sha }}
         working-directory: "./transfermarket-api"
         run: | 
-            docker build . -t "ghcr.io/globall-connect/transfermarketapi:${{steps.getsha.outputs.latest_sha}}" -t "ghcr.io/globall-connect/transfermarketapi:latest"
+            docker build . -t "ghcr.io/globall-connect/transfermarketapi:${{ steps.check.outputs.latest_sha }}" -t "ghcr.io/globall-connect/transfermarketapi:latest"
       - name: Push Docker Image
         if: ${{ vars.LATEST_SHA != steps.check.outputs.latest_sha }}
         working-directory: "./transfermarket-api"
         run: | 
-            docker push "ghcr.io/globall-connect/transfermarketapi:${{steps.getsha.outputs.latest_sha}}"
+            docker push "ghcr.io/globall-connect/transfermarketapi:${{steps.check.outputs.latest_sha}}"
             docker push "ghcr.io/globall-connect/transfermarketapi:latest"
  
   deploy:
