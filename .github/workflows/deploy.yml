@@ -7,10 +7,13 @@ on:
 
 permissions:
   packages: write
+  repository-projects: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      latest_sha: ${{steps.getsha.outputs.latest_sha}}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -73,3 +76,10 @@ jobs:
       - name: 'Trigger Webhook for CD on Azure App Service'
         run: | 
           curl https://\${{ secrets.AZURE_APP_SERVICE_WEBHOOK }}@transfermarketapi.scm.azurewebsites.net/docker/hook -H "" -d ""
+      - name: 'Update Commit Hash'
+        uses: mmoyaferrer/set-github-variable@v1.0.0
+        with:
+            name: 'LATEST_SHA'
+            value: '${{ needs.build.outputs.latest_sha }}'
+            repository: mmoyaferrer/set-github-variable
+            token: ${{ secrets.GITHUB_TOKEN }}
