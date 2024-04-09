@@ -81,9 +81,9 @@ jobs:
           app-name: 'transfermarketapi'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           images: 'ghcr.io/globall-connect/transfermarketapi:latest'
-      - name: 'Update Commit Hash'
-        run: |
-          gh variable set LATEST_SHA --body "${{ needs.build.outputs.latest_sha }}"
-        env:
-          GH_TOKEN: ${{secrets.COMMIT_UPDATE_SECRET}}
-      
+      - uses: mmoyaferrer/set-github-variable@v1.0.0
+        with:
+            name: 'LATEST_SHA'
+            value: '${{ needs.build.outputs.latest_sha }}'
+            repository: globall-connect/transfermarktapi
+            token: ${{ secrets.COMMIT_UPDATE_SECRET }}
