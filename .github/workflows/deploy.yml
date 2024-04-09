@@ -34,14 +34,15 @@ jobs:
         working-directory: "./transfermarket-api"
         run: |
             latest_sha=$(git rev-parse HEAD)
+            isBuild=true
             echo "Latest Commit ID for Transfer Market API : $latest_sha"
             # Compare the provided SHA with the latest SHA and confirm whether build is required
             if [ "${{vars.LATEST_SHA}}" = "$latest_sha" ]; then
-                echo "isBuild=true" >> $GITHUB_OUTPUT    
+                echo "isBuild=$isBuild" >> $GITHUB_OUTPUT    
             else
                 echo "isBuild=false" >> $GITHUB_OUTPUT
             fi
-      
+            echo "Output [$isBuild]"
       - name: Set up QEMU
         if: ${{ steps.check.outputs.isBuild }} == 'true'
         uses: docker/setup-qemu-action@v3
