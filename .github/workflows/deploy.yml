@@ -37,7 +37,7 @@ jobs:
             isBuild=true
             echo "Latest Commit ID for Transfer Market API : $latest_sha"
             # Compare the provided SHA with the latest SHA and confirm whether build is required
-            if [ "${{vars.LATEST_SHA}}" = "$latest_sha" ]; then
+            if [ "${{vars.LATEST_SHA}}" != "$latest_sha" ]; then
                 echo "isBuild=$isBuild" >> $GITHUB_OUTPUT    
             else
                 echo "isBuild=false" >> $GITHUB_OUTPUT
