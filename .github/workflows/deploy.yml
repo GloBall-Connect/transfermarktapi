@@ -84,4 +84,6 @@ jobs:
       - name: 'Update Commit Hash'
         run: |
           gh variable set LATEST_SHA --body "${{ needs.build.outputs.latest_sha }}"
+        env:
+          GH_TOKEN: ${{secrets.COMMIT_UPDATE_SECRET}}
       
